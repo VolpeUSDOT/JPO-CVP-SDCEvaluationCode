@@ -45,7 +45,7 @@ This script performs interpolations on the BSM data for specific event types. Th
 
 This script is used to fill gaps in BSM data surounding warnings issued to drivers during the THEA CVP deployment period. Gaps in the data range from a few tenths of a second to a few seconds. Volpe's data analysis methodologies relies on having data points every tenth of a second, so this script ensures that the analysis dataset has data points consistently 0.1 second intervals.
 
- - Inputs:
+- Inputs:
 	1) THEA data table for the "event type" indicated by the script name on SQL server. "Event type" should be one of the following:
 		a. FCW
 		b. EEBL
@@ -60,4 +60,68 @@ This script is used to fill gaps in BSM data surounding warnings issued to drive
 - Outputs:
 	1) Sent BSM data interpolated to 0.1 second intervals
 	2) Received BSM data interpolated to 0.1 second intervals
+
+## 3. VehicleKinematics.sql
+The Volpe team developed different vehicle kinematic parameters using the sent and received BSM data to conduct the safety evaluation for CVP safety applications. Detailed descriptions of the calculations performed in this script are summarized in Appendix D https://rosap.ntl.bts.gov/view/dot/61972/dot_61972_DS1.pdf. The inputs listed here are taken from the recieved and sent BSM tables in the THEA database stored on the SDC. The SQL script outputs a new table that contains the kinematic data between host and remote vehicles. 
+-	Input:
+	1) Date/Time
+	2) Latitude
+	3) Longitude
+	4) Heading
+	5) Speed
+	6) Longitudinal Acceleration
+	7) Lateral Acceleration	
+-	Outputs:
+	1) Range
+	2) Range Rate
+	3) Time-To-Collision (TTC)
+	4) Longitudinal Range
+	5) Latitudinal Range
+	6) Time-To-Intersection (TTI) (for perpendicularly approaching vehicles)
+	7) Relative target vehicle location (Front, back, side)
+	8) Relative target lane position (in lane, adjacent)
+	9) Relative Distance to Point of Interest (e.g., crosswalk or intersection)
+   	10) Time To Point of Interest
+
+## 4. THEA_V2V_Exposure.SQL
+This algorithm derives and analyzes information regarding the exposure of equipped vehicles to other equipped vehicles (i.e., V2V interactions) which allows the safety applications to issue alerts to HVs as designed. The inputs to this script are columns in the BSM tables in the THEA data stored on the SDC.
+- Inputs:
+	1) Host and remote vehicle headings
+	2) Host and remote vehicle elevations
+	3) Longitudinal and lateral ranges between host and remote vehicles
+	4) Relative remote vehicle location 
+- Output:
+	1) Timing per V2V safety application
+
+## 5. THEA_V2I_Exposure.SQL
+This algorithm derives and analyzes information regarding the exposure of equipped vehicles to other equipped infrastructure locations (i.e., V2I interactions), which allows the safety applications to issue alerts to HVs as designed.
+- Inputs:
+	1) Host and remote GPS
+	2) Obtained geo-fence the equipped infrastructure locations
+	3) Host vehicle heading
+- Output:
+	1) Frequency per V2I safety applications
+
+
+## 6.  THEA_[event type]\_Event.py
+
+This algorithm captures the validated FCW alert scenarios where the host vehicle is at risk of colliding with the vehicle in front of it. The FCW conflicts are  from the raw data with a combination of BSM data and event data (alert flag). 
+- Input:
+	1) Event logger
+	2) 2Bsm data
+	3) Kinematics data
+- Outputs:
+	- Variables required to determine the presence of a FCW conflict include:
+		1) Lead vehicle event
+		2) Braking intensity
+		3) TTC
+		4) Range
+		5) Range rate
+		6) Headway
+	- Event conflicts validated using the visualization tool. The metrics used to assess driver response to FCW conflict include:
+		1) TTC at brake onset
+		2) Minimum TTC
+		3) Peak deceleration
+		4) Average deceleration 
+		5) Headway time at brake onset
 
