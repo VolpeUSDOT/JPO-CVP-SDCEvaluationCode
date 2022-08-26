@@ -1,0 +1,535 @@
+{
+"database_connection":
+    {
+        "address": "ECSPWVOL01",
+        "database": "master"
+    },
+"sites_details": [
+    {
+        "site_name": "wydot",
+        "schema_name": "WYDOTDB",
+        "event_tables": [
+            
+        ]
+    },
+    {
+        "site_name": "thea",
+        "schema_name": "THEADB_V2",
+        "event_tables":[
+            {
+                "event_type": "FCW",
+                "event_type_column_name": "WarningType",
+                "event_description": "Forward Collision Warning",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                "id_column_name":"EventID",
+                "event_time_column_name":"StartTime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"Volpe_ReceivedBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "IMA",
+                "event_type_column_name": "WarningType",
+                "event_description": "Intersection Movement Assist",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                "id_column_name":"EventID",
+                "event_time_column_name":"StartTime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                       {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"Volpe_ReceivedBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "EEBL",
+                "event_type_column_name": "WarningType",
+                "event_description": "Emergency Electronic Brakelight Warning",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                 "id_column_name":"EventID",
+                 "event_time_column_name":"StartTime",
+                 "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                     {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"Volpe_ReceivedBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "PCW",
+                "event_type_column_name": "WarningType",
+                "event_description": "Pedestrian Collision Warning",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                 "id_column_name":"EventID",
+                 "event_time_column_name":"StartTime",
+                 "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"Volpe_ReceivedPSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "VTRFTV",
+                "event_type_column_name": "WarningType",
+                "event_description": "Vehicle Turning Right in Front of Transit Vehicle",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                 "id_column_name":"EventID",
+                 "event_time_column_name":"StartTime",
+                 "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"Volpe_ReceivedBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "WWE",
+                "event_type_column_name": "WarningType",
+                "event_description": "Wrong Way Entry Warning",
+                "table_name":"Volpe_Thea_WWE_VizualizationTool_Table",
+                "id_column_name":"EventID",
+                "event_time_column_name":"StartTime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }                
+                ]
+            },
+            {
+                "event_type": "ERDW",
+                "event_type_column_name": "WarningType",
+                "event_description": "End of Ramp Deceleration Warning",
+                "table_name":"Volpe_THEA_All_Warning_07312020",
+                "id_column_name":"EventID",
+                "event_time_column_name":"StartTime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"RV_ID",
+                "host_lat_column_name":"Latitude",
+                "host_long_column_name":"Longitude",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"Volpe_SentBSM_interpedEventData",
+                        "event_type_column_name":"warningType",
+                        "datetime_column_name":"Time",
+                        "lat_column_name":"Latitude",
+                        "long_column_name":"Longitude",
+                        "heading_column_name":"Heading"
+                    }                
+                ]
+            }                        
+        ]
+    },
+    {
+        "site_name": "nyc",
+        "schema_name": "NYCDB",
+        "event_tables": [
+            {
+                "event_type": "bsw",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"TargetVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "cspdomp",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "eebl",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"TargetVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "evacinfo",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "fcw",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"TargetVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "ima",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"TargetVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "lcw",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"TargetVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "ovcclearancelimit",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "pedinxwalk",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "rlvw",
+                "event_type_column_name": "WarningType",
+                "event_description": "red light violation warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    },
+                    {
+                        "dependency_name":"StopLineDataRLVW_1",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"StopLineYdeg",
+                        "long_column_name":"StopLineXdeg",
+                        "heading_column_name":"LaneAngle"
+                    }
+                    
+                ]
+            },
+            {
+                "event_type": "spdcomp",
+                "event_type_column_name": "WarningType",
+                "event_description": "speed compliance",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            },
+            {
+                "event_type": "spdcompwz",
+                "event_type_column_name": "WarningType",
+                "event_description": "blind spot warning",
+                "table_name":"AllWarningEvent",
+                "id_column_name":"VolpeID",
+                "event_time_column_name":"dummytime",
+                "host_id_column_name":"HostVehID",
+                "remote_id_column_name":"TargetID",
+                "host_lat_column_name":"Ydeg",
+                "host_long_column_name":"Xdeg",
+                "dependency_tables": [
+                    {
+                        "dependency_name":"HostVehicleData",
+                        "event_type_column_name":"EventType",
+                        "datetime_column_name":"dummytime",
+                        "lat_column_name":"Ydeg",
+                        "long_column_name":"Xdeg",
+                        "heading_column_name":"Heading"
+                    }
+                ]
+            }
+        ] 
+    }
+]
+}
