@@ -3,7 +3,7 @@
 This "README" file describes the scripts used to process and analyze the THEA connected vehicle data sent to the SDC between 2019-06-01 to 2020-07-01.
 
 ## 1. TransferEventData.py
-This script transfers data from the SDC's data warehouse. This script reads data from the tables in the list of table names where THEA's warning data is stored. Due to the way date's are encoded in the original data streams, some dates stored in the SDC's data warehouse are eroneous. Therefore, this transfer script attempts to recognize these erroneous dates and times and correct them, improving the quality of the resultant data.
+This script transfers data from the SDC's data warehouse. This script reads data from the tables in the list of table names where THEA's warning data is stored. Due to the way date's are encoded in the original data streams, some dates stored in the SDC's data warehouse are erroneous. Therefore, this transfer script attempts to recognize these erroneous dates and times and correct them, improving the quality of the resultant data.
 
 Significant variables to set in script:
 - Hadoop data warehouse server IP address and port number
@@ -14,7 +14,7 @@ Significant variables to set in script:
 	1) THEA data tables stored on SDC data warehouse
 		a. Forward Collision Warning
 		b. Emergency Electronic Brake Light Warning
-		c. Interseciton Movement Assist Warning
+		c. Intersection Movement Assist Warning
 		d. Pedestrian Collision Warning
 		e. Vehicle Turning Right in Front of Transit Vehicle Warning
 		f. Wrong Way Entry Warning
@@ -26,7 +26,7 @@ Significant variables to set in script:
 	1) THEA data tables (with corrected dates and times)
 		a. Forward Collision Warning
 		b. Emergency Electronic Brake Light Warning
-		c. Interseciton Movement Assist Warning
+		c. Intersection Movement Assist Warning
 		d. Pedestrian Collision Warning
 		e. Vehicle Turning Right in Front of Transit Vehicle Warning
 		f. Wrong Way Entry Warning
@@ -43,7 +43,7 @@ This script performs interpolations on the BSM data for specific event types. Th
 	5) VTRFTV
 	6) WWE
 
-This script is used to fill gaps in BSM data surounding warnings issued to drivers during the THEA CVP deployment period. Gaps in the data range from a few tenths of a second to a few seconds. Volpe's data analysis methodologies relies on having data points every tenth of a second, so this script ensures that the analysis dataset has data points consistently 0.1 second intervals.
+This script is used to fill gaps in BSM data surrounding warnings issued to drivers during the THEA CVP deployment period. Gaps in the data range from a few tenths of a second to a few seconds. Volpe's data analysis methodologies relies on having data points every tenth of a second, so this script ensures that the analysis dataset has data points consistently 0.1 second intervals.
 
 - Inputs:
 	1) THEA data table for the "event type" indicated by the script name on SQL server. "Event type" should be one of the following:
@@ -61,8 +61,18 @@ This script is used to fill gaps in BSM data surounding warnings issued to drive
 	1) Sent BSM data interpolated to 0.1 second intervals
 	2) Received BSM data interpolated to 0.1 second intervals
 
+## 3. register.sql
+This script is used to register the C# functions with the SQL Server instance so they can be used with the CVPilot Data. There is no input or output for this script.
+
+## 3. computedcolumns.sql
+This script creates SQL Geometry columns using the latitude and longitude fields of THEA BSM data. It is necessary to run this script before running the Vehicle Kinematics calculations.
+- Input:
+	1) THEA received and sent BSM data. 
+- Output:
+	1) Copies of BSM tables with geometric columns
+
 ## 3. VehicleKinematics.sql
-The Volpe team developed different vehicle kinematic parameters using the sent and received BSM data to conduct the safety evaluation for CVP safety applications. Detailed descriptions of the calculations performed in this script are summarized in Appendix D https://rosap.ntl.bts.gov/view/dot/61972/dot_61972_DS1.pdf. The inputs listed here are taken from the recieved and sent BSM tables in the THEA database stored on the SDC. The SQL script outputs a new table that contains the kinematic data between host and remote vehicles. 
+The Volpe team developed different vehicle kinematic parameters using the sent and received BSM data to conduct the safety evaluation for CVP safety applications. Detailed descriptions of the calculations performed in this script are summarized in Appendix D https://rosap.ntl.bts.gov/view/dot/61972/dot_61972_DS1.pdf. The inputs listed here are taken from the received and sent BSM tables in the THEA database stored on the SDC. The SQL script outputs a new table that contains the kinematic data between host and remote vehicles. 
 -	Input:
 	1) Date/Time
 	2) Latitude
@@ -102,19 +112,25 @@ This algorithm derives and analyzes information regarding the exposure of equipp
 - Output:
 	1) Frequency per V2I safety applications
 
+## 6.  THEA_[event type]\_Event.sql
 
-## 6.  THEA_[event type]\_Event.py
-
-This algorithm captures the validated FCW alert scenarios where the host vehicle is at risk of colliding with the vehicle in front of it. The FCW conflicts are  from the raw data with a combination of BSM data and event data (alert flag). 
+These algorithms capture the validated alert scenarios where the host vehicle is at risk of colliding with the vehicle in front of it. The V2V event conflicts are derived from the raw event data with a combination of BSM fields and event fields (alert flag). The specific BSM data fields used in these algorithms vary by the event type. The "event types" are as follows:
+ 	1) FCW
+	2) EEBL
+	3) IMA
+	4) PCW
+	5) VTRFTV
+	6) WWE
 - Input:
 	1) Event logger
-	2) 2Bsm data
+	2) BSM data
 	3) Kinematics data
 - Outputs:
 	- Variables required to determine the presence of a FCW conflict include:
 		1) Lead vehicle event
 		2) Braking intensity
 		3) TTC
+		4) Minimum TTC
 		4) Range
 		5) Range rate
 		6) Headway
