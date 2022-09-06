@@ -1,0 +1,20 @@
+language: csharp
+solution: SqlSdcLibrary/SqlSdcLibrary.sln
+
+install:
+  - nuget restore SqlSdcLibrary/SqlSdcLibrary.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+  
+script:
+  - msbuild /p:Configuration=Release /p:Platform="Any CPU" SqlSdcLibrary/SqlSdcLibrary.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./SqlSdcLibrary.Test/bin/Release/SqlSdcLibrary.Test.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./SqlSdcLibrary.Specs/bin/Release/SqlSdcLibrary.Specs.dll
+
+
+  
+notifications:
+  email:
+    recipients:
+      - $emailaddress
+    on_success: always # default: change
+    on_failure: always # default: always

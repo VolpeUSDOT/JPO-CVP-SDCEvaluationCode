@@ -64,14 +64,14 @@ This script is used to fill gaps in BSM data surrounding warnings issued to driv
 ## 3. register.sql
 This script is used to register the C# functions with the SQL Server instance so they can be used with the CVPilot Data. There is no input or output for this script.
 
-## 3. computedcolumns.sql
+## 4. computedcolumns.sql
 This script creates SQL Geometry columns using the latitude and longitude fields of THEA BSM data. It is necessary to run this script before running the Vehicle Kinematics calculations.
 - Input:
 	1) THEA received and sent BSM data. 
 - Output:
 	1) Copies of BSM tables with geometric columns
 
-## 3. VehicleKinematics.sql
+## 5. VehicleKinematics.sql
 The Volpe team developed different vehicle kinematic parameters using the sent and received BSM data to conduct the safety evaluation for CVP safety applications. Detailed descriptions of the calculations performed in this script are summarized in Appendix D https://rosap.ntl.bts.gov/view/dot/61972/dot_61972_DS1.pdf. The inputs listed here are taken from the received and sent BSM tables in the THEA database stored on the SDC. The SQL script outputs a new table that contains the kinematic data between host and remote vehicles. 
 -	Input:
 	1) Date/Time
@@ -93,7 +93,7 @@ The Volpe team developed different vehicle kinematic parameters using the sent a
 	9) Relative Distance to Point of Interest (e.g., crosswalk or intersection)
    	10) Time To Point of Interest
 
-## 4. THEA_V2V_Exposure.SQL
+## 6. THEA_V2V_Exposure.SQL
 This algorithm derives and analyzes information regarding the exposure of equipped vehicles to other equipped vehicles (i.e., V2V interactions) which allows the safety applications to issue alerts to HVs as designed. The inputs to this script are columns in the BSM tables in the THEA data stored on the SDC.
 - Inputs:
 	1) Host and remote vehicle headings
@@ -103,7 +103,7 @@ This algorithm derives and analyzes information regarding the exposure of equipp
 - Output:
 	1) Timing per V2V safety application
 
-## 5. THEA_V2I_Exposure.SQL
+## 7. THEA_V2I_Exposure.SQL
 This algorithm derives and analyzes information regarding the exposure of equipped vehicles to other equipped infrastructure locations (i.e., V2I interactions), which allows the safety applications to issue alerts to HVs as designed.
 - Inputs:
 	1) Host and remote GPS
@@ -112,7 +112,7 @@ This algorithm derives and analyzes information regarding the exposure of equipp
 - Output:
 	1) Frequency per V2I safety applications
 
-## 6.  THEA_[event type]\_Event.sql
+## 8.  THEA_[event type]\_Event.sql
 
 These algorithms capture the validated alert scenarios where the host vehicle is at risk of colliding with the vehicle in front of it. The V2V event conflicts are derived from the raw event data with a combination of BSM fields and event fields (alert flag). The specific BSM data fields used in these algorithms vary by the event type. The "event types" are as follows:
  	1) FCW
