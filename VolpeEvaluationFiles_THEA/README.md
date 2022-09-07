@@ -43,7 +43,7 @@ This script performs interpolations on the BSM data for specific event types. Th
 	5) VTRFTV
 	6) WWE
 
-This script is used to fill gaps in BSM data surrounding warnings issued to drivers during the THEA CVP deployment period. Gaps in the data range from a few tenths of a second to a few seconds. Volpe's data analysis methodologies relies on having data points every tenth of a second, so this script ensures that the analysis dataset has data points consistently 0.1 second intervals.
+This script is used to fill gaps in BSM data surrounding warnings issued to drivers during the THEA CVP deployment period. Gaps in the data range from a few tenths of a second to a few seconds. Volpe's data analysis methodologies relies on having data points every tenth of a second, so this script ensures that the analysis dataset has data points consistently at 0.1 second intervals.
 
 - Inputs:
 	1) THEA data table for the "event type" indicated by the script name on SQL server. "Event type" should be one of the following:
