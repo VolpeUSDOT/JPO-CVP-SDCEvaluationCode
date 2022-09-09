@@ -1,4 +1,4 @@
-# README File for Vehivle Vizualization Event Playback Backend Python Code
+# README File for Vehicle Vizualization Event Playback Backend Python Code
 
 ## Files
 There are two files necessary to run the backend of the code. 
