@@ -18,33 +18,33 @@ Each message type data set has corresponding sql scripts that as a group conform
 
 
 ## Data Loading Steps
-For the purpose of this write up, we will use WYDOT Alert data set as an example.
+For the purpose of this write up, we will use WYDOT BSM data set as an example.
 
 As such, the following scripts will be discussed:
 ```
-wydot_alert_create_staging.sql
-wydot_alert_prod.sql
-relational/wydot_alert_rel_prod.sql
-wydot_alert_drop_staging.sql
+wydot_bsm_create_staging.sql
+wydot_bsm_prod.sql
+relational/wydot_bsm_rel_prod.sql
+wydot_bsm_drop_staging.sql
 ```
 
 ### Prerequisites ###
 
 One or more data file with messages of specific type exist at a designated AWS S3 bucket location.
 
-### 1. wydot_alert_create_staging.sql ###
+### 1. wydot_bsm_create_staging.sql ###
 
 This is the first step for reloading data. We utilize ability of Hadoop data warehouse to create data tables directly from S3 locations.
 
-### 2. wydot_alert_prod.sql ###
+### 2. wydot_bsm_prod.sql ###
 
 This script creates and populates a set of non-relational tables that will be utilized later in the process in order to create relational ones for easier querying.
 
-### 3. relational/wydot_alert_rel_prod.sql ###
+### 3. relational/wydot_bsm_rel_prod.sql ###
 
 This script creates and populates a set of relational tables for data analysis.
 
-### 4. wydot_alert_drop_staging.sql ###
+### 4. wydot_bsm_drop_staging.sql ###
 
 Cleanup: removal of staging tables.
 
