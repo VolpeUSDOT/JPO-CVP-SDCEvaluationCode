@@ -1,0 +1,221 @@
+--------------------------------------------------------------
+-- Create the THEA_RECEIVEDMAP_STAGING table 
+--------------------------------------------------------------
+DROP TABLE IF EXISTS thea_receivedmap_staging;
+
+CREATE EXTERNAL TABLE IF NOT EXISTS thea_receivedmap_staging(
+    metadata struct<
+        loguploadedat:string,
+        msgcnt:int,
+        burstcnt:int,
+        burstid:bigint,
+        hostvehicleid:string,
+        logpsid:string,
+        rsulist:string,
+        receivedrsutimestamps:bigint,
+        datalogid:string,
+        loggeneratedat:string,
+        eventtype:string,
+        dot3:struct<
+            channel:int,
+            psid:string,
+            signal:struct<
+                rxstrength:int>,
+            datarate:int,
+            timeslot:int>
+    >,
+    payload struct<
+        messageframe:struct<
+            messageid:int,
+            value:struct<
+                mapdata:struct<
+                    msgissuerevision:int,
+                    layertype:string,
+                    layerid:int,
+                    intersections:struct<
+                        intersectiongeometry:struct<
+                            id:struct<
+                                id:int>,
+                            revision:int,
+                            refpoint:struct<
+                                lat:int,
+                                long:int>,
+                            lanewidth:int,
+                            laneset:struct<
+                                genericlane:array<
+                                    struct<
+                                        laneid:int,
+                                        ingressapproach:int,
+                                        maneuvers:bigint,
+                                        laneattributes:struct<
+                                            directionaluse:int,
+                                            sharedwidth:int,
+                                            lanetype:struct<
+                                                vehicle:int>>,
+                                        nodelist:struct<
+                                            nodes:struct<
+                                                nodexy:array<
+                                                    struct<
+                                                        delta:struct<
+                                                            nodexy1:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy2:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy3:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy4:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy5:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy6:struct<
+                                                                x:int,
+                                                                y:int>
+                                                        >
+                                                    >
+                                                >
+                                            >
+                                        >,
+                                        connectsto:struct<
+                                            connection:array<
+                                                struct<
+                                                    connectinglane:struct<
+                                                        lane:int,
+                                                        maneuver:bigint>,
+                                                    signalgroup:int
+                                                >
+                                            >
+                                        >
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >
+        >
+    >
+)
+ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+WITH SERDEPROPERTIES(
+ "ignore.malformed.json" = "true",
+ "mapping.nodexy1"="node-xy1",
+ "mapping.nodexy2"="node-xy2",
+ "mapping.nodexy3"="node-xy3",
+ "mapping.nodexy4"="node-xy4",
+ "mapping.nodexy5"="node-xy5",
+ "mapping.nodexy6"="node-xy6"
+)
+LOCATION 
+'s3a://DOT-SDC-CVP-STAGING-S3-BUCKET-NAME/cv/thea/OBU/receivedMAP/';
+--'s3a://DOT-SDC-CVP-STAGING-S3-BUCKET-NAME/cv/thea/OBU/receivedMAP/';
+
+CREATE TABLE IF NOT EXISTS thea_receivedmap(
+    metadata struct<
+        loguploadedat:string,
+        msgcnt:int,
+        burstcnt:int,
+        burstid:bigint,
+        hostvehicleid:string,
+        logpsid:string,
+        rsulist:string,
+        receivedrsutimestamps:bigint,
+        datalogid:string,
+        loggeneratedat:string,
+        eventtype:string,
+        dot3:struct<
+            channel:int,
+            psid:string,
+            signal:struct<
+                rxstrength:int>,
+            datarate:int,
+            timeslot:int>
+    >,
+    payload struct<
+        messageframe:struct<
+            messageid:int,
+            value:struct<
+                mapdata:struct<
+                    msgissuerevision:int,
+                    layertype:string,
+                    layerid:int,
+                    intersections:struct<
+                        intersectiongeometry:struct<
+                            id:struct<
+                                id:int>,
+                            revision:int,
+                            refpoint:struct<
+                                lat:int,
+                                long:int>,
+                            lanewidth:int,
+                            laneset:struct<
+                                genericlane:array<
+                                    struct<
+                                        laneid:int,
+                                        ingressapproach:int,
+                                        maneuvers:bigint,
+                                        laneattributes:struct<
+                                            directionaluse:int,
+                                            sharedwidth:int,
+                                            lanetype:struct<
+                                                vehicle:int>>,
+                                        nodelist:struct<
+                                            nodes:struct<
+                                                nodexy:array<
+                                                    struct<
+                                                        delta:struct<
+                                                            nodexy1:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy2:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy3:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy4:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy5:struct<
+                                                                x:int,
+                                                                y:int>,
+                                                            nodexy6:struct<
+                                                                x:int,
+                                                                y:int>
+                                                        >
+                                                    >
+                                                >
+                                            >
+                                        >,
+                                        connectsto:struct<
+                                            connection:array<
+                                                struct<
+                                                    connectinglane:struct<
+                                                        lane:int,
+                                                        maneuver:bigint>,
+                                                    signalgroup:int
+                                                >
+                                            >
+                                        >
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >
+        >
+    >
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+STORED AS INPUTFORMAT
+   'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+ OUTPUTFORMAT
+   'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
+ TBLPROPERTIES (
+   'orc.compress'='Zlib');
+

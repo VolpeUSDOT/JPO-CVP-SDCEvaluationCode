@@ -1,0 +1,225 @@
+--------------------------------------------------------------
+-- Create the THEA_RECEIVEDBSM_STAGING table 
+--------------------------------------------------------------
+DROP TABLE IF EXISTS thea_receivedbsm_staging;
+
+CREATE EXTERNAL TABLE IF NOT EXISTS thea_receivedbsm_staging(
+    metadata struct<
+        loguploadedat:string,
+        msgcnt:int,
+        burstcnt:int,
+        burstid:bigint,
+        hostvehicleid:string,
+        logpsid:string,
+        rsulist:string,
+        receivedrsutimestamps:string,
+        datalogid:string,
+        loggeneratedat:string,
+        eventtype:string,
+        dot3:struct<
+            channel:int,
+            psid:string,
+            signal:struct<
+                rxstrength:int>,
+            datarate:int,
+            timeslot:int>
+    >,
+    payload struct<
+        messageframe:struct<
+            messageid:int,
+            value:struct<
+                basicsafetymessage:struct<
+                    coredata:struct<
+                        msgcnt:int,
+                        id:string,
+                        secmark:int,
+                        lat:int,
+                        long:int,
+                        elev:int,
+                        accuracy:struct<
+                            semimajor:int,
+                            semiminor:int,
+                            orientation:int>,
+                        transmission:string,
+                        speed:int,
+                        heading:int,
+                        angle:int,
+                        accelset:struct<
+                            long:int,
+                            lat:int,
+                            vert:int,
+                            yaw:int>,
+                        brakes:struct<
+                            wheelbrakes:string,
+                            traction:string,
+                            abs:string,
+                            scs:string,
+                            brakeboost:string,
+                            auxbrakes:string>,
+                        size:struct<
+                            width:int,
+                            length:int>
+                    >,
+                    partII:struct<
+                        sequence:array<
+                            struct<
+                                partiiid:int,
+                                partiivalue:struct<
+                                    vehiclesafetyextensions:struct<
+                                        pathhistory:struct<
+                                            crumbdata:struct<
+                                                pathhistorypoint:array<
+                                                    struct<
+                                                        latoffset:int,
+                                                        lonoffset:int,
+                                                        elevationoffset:int,
+                                                        timeoffset:int
+                                                    >
+                                                >
+                                            >
+                                        >,
+                                        pathprediction:struct<
+                                            radiusofcurve:int,
+                                            confidence:int>,
+                                        lights:string
+                                    >,
+                                    supplementalvehicleextensions:struct<
+                                        classification:int,
+                                        classdetails:struct<
+                                            role:string,
+                                            hpmstype:string>,
+                                        vehicledata:struct<
+                                            height:int,
+                                            bumpers:struct<
+                                                front:int,
+                                                rear:int>,
+                                            mass:int>
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >
+        >
+    >
+)
+ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+WITH SERDEPROPERTIES(
+ "ignore.malformed.json" = "true",
+ "mapping.partiiid"="partii-id",
+ "mapping.partiivalue"="partii-value"
+)
+LOCATION 
+'s3a://DOT-SDC-CVP-STAGING-S3-BUCKET-NAME/cv/thea/OBU/receivedBSM/';
+--'s3a://DOT-SDC-CVP-STAGING-S3-BUCKET-NAME/cv/thea/OBU/receivedBSM/';
+
+CREATE TABLE IF NOT EXISTS thea_receivedbsm(
+    metadata struct<
+        loguploadedat:string,
+        msgcnt:int,
+        burstcnt:int,
+        burstid:bigint,
+        hostvehicleid:string,
+        logpsid:string,
+        rsulist:string,
+        receivedrsutimestamps:string,
+        datalogid:string,
+        loggeneratedat:string,
+        eventtype:string,
+        dot3:struct<
+            channel:int,
+            psid:string,
+            signal:struct<
+                rxstrength:int>,
+            datarate:int,
+            timeslot:int>
+    >,
+    payload struct<
+        messageframe:struct<
+            messageid:int,
+            value:struct<
+                basicsafetymessage:struct<
+                    coredata:struct<
+                        msgcnt:int,
+                        id:string,
+                        secmark:int,
+                        lat:int,
+                        long:int,
+                        elev:int,
+                        accuracy:struct<
+                            semimajor:int,
+                            semiminor:int,
+                            orientation:int>,
+                        transmission:string,
+                        speed:int,
+                        heading:int,
+                        angle:int,
+                        accelset:struct<
+                            long:int,
+                            lat:int,
+                            vert:int,
+                            yaw:int>,
+                        brakes:struct<
+                            wheelbrakes:string,
+                            traction:string,
+                            abs:string,
+                            scs:string,
+                            brakeboost:string,
+                            auxbrakes:string>,
+                        size:struct<
+                            width:int,
+                            length:int>
+                    >,
+                    partII:struct<
+                        sequence:array<
+                            struct<
+                                partiiid:int,
+                                partiivalue:struct<
+                                    vehiclesafetyextensions:struct<
+                                        pathhistory:struct<
+                                            crumbdata:struct<
+                                                pathhistorypoint:array<
+                                                    struct<
+                                                        latoffset:int,
+                                                        lonoffset:int,
+                                                        elevationoffset:int,
+                                                        timeoffset:int
+                                                    >
+                                                >
+                                            >
+                                        >,
+                                        pathprediction:struct<
+                                            radiusofcurve:int,
+                                            confidence:int>,
+                                        lights:string
+                                    >,
+                                    supplementalvehicleextensions:struct<
+                                        classification:int,
+                                        classdetails:struct<
+                                            role:string,
+                                            hpmstype:string>,
+                                        vehicledata:struct<
+                                            height:int,
+                                            bumpers:struct<
+                                                front:int,
+                                                rear:int>,
+                                            mass:int>
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >
+        >
+    >
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.orc.OrcSerde'
+STORED AS INPUTFORMAT
+   'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'
+ OUTPUTFORMAT
+   'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'
+ TBLPROPERTIES (
+   'orc.compress'='Zlib');
+

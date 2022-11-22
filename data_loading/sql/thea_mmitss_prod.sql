@@ -1,0 +1,1 @@
+INSERT INTO TABLE thea_mmitss SELECT * FROM thea_mmitss_staging a WHERE a.metadata.dataType IS NOT NULL;

@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS wydot_rwis_surface_staging;

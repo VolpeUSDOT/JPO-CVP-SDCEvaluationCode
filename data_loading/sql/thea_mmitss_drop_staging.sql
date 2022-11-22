@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS thea_mmitss_staging;
